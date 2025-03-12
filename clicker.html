@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Голос Будущего | Политическая партия</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-color: #1f2937;
+            --light-color: #f3f4f6;
+            --dark-color: #111827;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Заголовки */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Кнопки */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Шапка */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-left: 30px;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            position: relative;
+        }
+
+        .main-nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover:after, .main-nav a.active:after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&auto=format');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 200px 0 150px;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            font-size: 4rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Приветственная секция */
+        .welcome {
+            padding: 80px 0;
+        }
+
+        .welcome-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .welcome-image {
+            flex: 0 0 40%;
+        }
+
+        .welcome-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-text {
+            flex: 1;
+        }
+
+        .welcome-text h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Превью новостей */
+        .news-preview {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .news-carousel {
+            display: flex;
+            gap: 30px;
+            overflow-x: hidden;
+            margin-bottom: 30px;
+        }
+
+        .news-item {
+            flex: 0 0 calc(33.333% - 20px);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-item:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .carousel-controls button {
+            background-color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-controls button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* CTA секция */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            margin-bottom: 20px;
+        }
+
+        .cta h2:after {
+            background-color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h3:after, .footer-contact h3:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-contact p {
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* О нас */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1600&auto=format');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0 100px;
+            margin-top: 80px;
+        }
+
+        .about-intro {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Лидер партии */
+        .leader-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .leader-content {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .leader-image {
+            flex: 0 0 35%;
+        }
+
+        .leader-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .leader-info {
+            flex: 1;
+        }
+
+        .leader-position {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .leader-bio p {
+            margin-bottom: 15px;
+        }
+
+        .leader-quote {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .leader-quote blockquote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        /* Министры */
+        .ministers-section {
+            padding: 80px 0;
+        }
+
+        .ministers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .minister-card {
+            display: flex;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .minister-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .minister-image {
+            flex: 0 0 40%;
+        }
+
+        .minister-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .minister-info {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .minister-position {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Ценности */
+        .values-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .value-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Новости */
+        .news-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .featured-news {
+            display: flex;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+        }
+
+        .featured-news-image {
+            flex: 0 0 40%;
+        }
+
+        .featured-news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-news-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .news-tag {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .featured-news h2 {
+            margin-bottom: 15px;
+        }
+
+        .news-date, .news-location {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .news-description {
+            margin-bottom: 30px;
+        }
+
+        .event-registration {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .event-registration h3 {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .news-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-card-image img {
+            transform: scale(1.1);
+        }
+
+        .news-card-content {
+            padding: 20px;
+        }
+
+        /* Календарь событий */
+        .events-calendar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .calendar-container {
+            margin-top: 30px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .calendar-grid {
+            margin-bottom: 30px;
+        }
+
+        .calendar-day-names {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-days div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-days .prev-month-day, .calendar-days .next-month-day {
+            color: #d1d5db;
+        }
+
+        .calendar-days .current-day {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .calendar-days .has-event {
+            position: relative;
+        }
+
+        .calendar-days .has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .calendar-days .has-event.current-day::after {
+            background-color: white;
+        }
+
+        .upcoming-events {
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .upcoming-events h4 {
+            margin-bottom: 15px;
+        }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--light-color);
+            border-radius: 4px;
+        }
+
+        .event-date {
+            flex: 0 0 80px;
+            font-weight: 600;
+        }
+
+        .event-title {
+            flex: 1;
+        }
+
+        .event-item a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Проекты */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-minister {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .minister-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .minister-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .minister-name {
+            font-weight: 600;
+        }
+
+        .minister-title {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .project-details {
+            margin-top: 30px;
+        }
+
+        .project-details h4 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .detail-icon {
+            flex: 0 0 30px;
+            color: var(--accent-color);
+        }
+
+        /* Контакты */
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            flex: 0 0 50px;
+            height: 50px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 20px;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 5px;
+        }
+
+        .contact-map {
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .welcome-content, .about-content, .leader-content, .contact-content {
+                flex-direction: column;
+            }
+            
+            .news-carousel {
+                flex-wrap: wrap;
+            }
+            
+            .news-item {
+                flex: 0 0 calc(50% - 15px);
+                margin-bottom: 30px;
+            }
+            
+            .ministers-grid, .news-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-news {
+                flex-direction: column;
+            }
+            
+            .featured-news-image {
+                flex: 0 0 300px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background-color: white;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .main-nav.active {
+                right: 0;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+                padding: 80px 30px;
+            }
+            
+            .main-nav li {
+                margin: 0 0 20px 0;
+            }
+            
+            .news-item {
+                flex: 0 0 100%;
+            }
+            
+            .news-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .minister-card {
+                flex-direction: column;
+            }
+            
+            .minister-image {
+                flex: 0 0 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .hero {
+                padding: 150px 0 100px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Анимации */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="#home">
+                        <img src="https://i.postimg.cc/47xMyvvM/logo.png" alt="Логотип Голос Будущего">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#home" class="active">Главная</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#news">Новости</a></li>
+                        <li><a href="#projects">Проекты</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главная страница -->
+    <section id="home" class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&auto=format');">
+        <div class="container">
+            <h1>Голос Будущего</h1>
+            <p class="subtitle">Строим будущее вместе с вами</p>
+            <a href="#about" class="btn-primary">Узнать больше</a>
+        </div>
+    </section>
+
+    <section class="welcome">
+        <div class="container">
+            <div class="welcome-content animate-on-scroll">
+                <div class="welcome-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Константин Константинович Рыжов">
+                </div>
+                <div class="welcome-text">
+                    <h2>Приветствие лидера партии</h2>
+                    <h3>Константин Константинович Рыжов</h3>
+                    <p>Дорогие друзья! Я рад приветствовать вас от имени политической партии "Голос Будущего". Наша партия создана для того, чтобы представлять интересы всех граждан, стремящихся к прогрессивному и справедливому обществу.</p>
+                    <p>Мы верим, что будущее нашей страны зависит от активного участия каждого гражданина в политической жизни. Наша миссия — создать платформу, где каждый голос будет услышан, где инновационные идеи найдут поддержку, а социальная справедливость станет реальностью.</p>
+                    <p>Приглашаю вас присоединиться к нам в этом важном деле. Вместе мы сможем построить будущее, которым будут гордиться наши дети и внуки.</p>
+                    <a href="#about" class="btn-secondary">Подробнее о нас</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news-preview">
+        <div class="container">
+            <h2>Последние новости</h2>
+            <div class="news-carousel animate-on-scroll">
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800" alt="Представление партии в 3-м лицее">
+                    </div>
+                    <div class="news-content">
+                        <p class="news-date">15 марта 2025</p>
+                        <h3>Представление партии в 3-м лицее</h3>
+                        <p>Приглашаем всех на презентацию нашей партии, которая состоится в четверг в 3-м лицее.</p>
+                        <a href="#news" class="btn-secondary">Подробнее</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Проект Коммунальный Анализатор">
+                    </div>
+                    <div class="news-content">
+                        <p class="news-date">10 июня 2023</p>
+                        <h3>Запуск проекта "Коммунальный Анализатор"</h3>
+                        <p>Министр финансов Пахомов Кирилл Сергеевич представил инновационный проект для контроля коммунальных расходов.</p>
+                        <a href="#projects" class="btn-secondary">Подробнее</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Фильтр Микропластика">
+                    </div>
+                    <div class="news-content">
+                        <p class="news-date">5 июня 2023</p>
+                        <h3>Инновационный фильтр микропластика</h3>
+                        <p>Министр здравоохранения Салимов Муслим Алиевич разработал уникальный фильтр микропластика на основе бактерий.</p>
+                        <a href="#projects" class="btn-secondary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta animate-on-scroll">
+        <div class="container">
+            <h2>Присоединяйтесь к нам</h2>
+            <p>Вместе мы сможем создать будущее, в котором каждый гражданин будет услышан, а его интересы будут защищены. Присоединяйтесь к партии "Голос Будущего" и станьте частью перемен!</p>
+            <a href="#contacts" class="btn-primary">Связаться с нами</a>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about" class="page-banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1600&auto=format');">
+        <div class="container">
+            <h1>О нас</h1>
+            <p>Познакомьтесь с командой, которая строит будущее</p>
+        </div>
+    </section>
+
+    <section class="about-intro">
+        <div class="container">
+            <div class="about-content animate-on-scroll">
+                <div class="about-text">
+                    <h2>Наша миссия и ценности</h2>
+                    <p>Партия "Голос Будущего" была основана с целью создания прогрессивного, справедливого и инновационного общества. Мы стремимся к тому, чтобы каждый гражданин имел возможность реализовать свой потенциал и внести вклад в развитие нашей страны.</p>
+                    <p>Наша партия объединяет людей разных профессий, возрастов и взглядов, но всех нас объединяет вера в то, что будущее можно и нужно строить вместе, опираясь на принципы демократии, социальной справедливости и инноваций.</p>
+                    <p>Мы верим, что политика должна быть открытой, честной и ориентированной на реальные потребности людей. Наша цель — не просто говорить о проблемах, но и предлагать конкретные решения, основанные на научном подходе и современных технологиях.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Команда партии Голос Будущего">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="leader-section">
+        <div class="container">
+            <h2>Лидер партии</h2>
+            <div class="leader-content animate-on-scroll">
+                <div class="leader-image">
+                    <img src="https://via.placeholder.com/500x600" alt="Константин Константинович Рыжов">
+                </div>
+                <div class="leader-info">
+                    <h3>Константин Константинович Рыжов</h3>
+                    <p class="leader-position">Председатель партии "Голос Будущего"</p>
+                    <div class="leader-bio">
+                        <p>Константин Константинович Рыжов — выдающийся политический деятель, визионер и стратег. Родился в 1975 году в Москве. Получил высшее образование в области политологии и международных отношений, имеет степень кандидата политических наук.</p>
+                        <p>На протяжении своей карьеры Константин Константинович занимал различные руководящие должности в государственных структурах и общественных организациях. Его богатый опыт и глубокое понимание политических процессов позволили ему сформировать уникальное видение будущего нашей страны.</p>
+                        <p>В 2020 году он основал партию "Голос Будущего", объединив вокруг себя команду единомышленников, разделяющих его ценности и стремление к созданию справедливого и прогрессивного общества.</p>
+                    </div>
+                    <div class="leader-quote">
+                        <blockquote>"Политика — это не борьба за власть, а инструмент для создания лучшего будущего для всех граждан. Наша задача — использовать этот инструмент мудро и ответственно."</blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ministers-section">
+        <div class="container">
+            <h2>Наша команда</h2>
+            <div class="ministers-grid animate-on-scroll">
+                <div class="minister-card">
+                    <div class="minister-image">
+                        <img src="https://via.placeholder.com/400x500" alt="Салимов Муслим Алиевич">
+                    </div>
+                    <div class="minister-info">
+                        <h3>Салимов Муслим Алиевич</h3>
+                        <p class="minister-position">Министр здравоохранения</p>
+                        <p>Выдающийся врач и ученый, разработавший инновационный фильтр микропластика на основе бактерий. Его работа направлена на улучшение здоровья населения и защиту окружающей среды.</p>
+                        <p>Муслим Алиевич стремится к созданию доступной и эффективной системы здравоохранения, основанной на передовых научных достижениях и технологиях.</p>
+                    </div>
+                </div>
+                <div class="minister-card">
+                    <div class="minister-image">
+                        <img src="https://via.placeholder.com/400x500" alt="Рунов Андрей Константинович">
+                    </div>
+                    <div class="minister-info">
+                        <h3>Рунов Андрей Константинович</h3>
+                        <p class="minister-position">Министр просвещения</p>
+                        <p>Опытный педагог и реформатор в области образования. Андрей Константинович разработал ряд инновационных образовательных программ, направленных на развитие критического мышления и творческих способностей учащихся.</p>
+                        <p>Его цель — создание образовательной системы, которая будет готовить молодежь к вызовам будущего и способствовать раскрытию потенциала каждого ученика.</p>
+                    </div>
+                </div>
+                <div class="minister-card">
+                    <div class="minister-image">
+                        <img src="https://via.placeholder.com/400x500" alt="Отаров Ислам Романович">
+                    </div>
+                    <div class="minister-info">
+                        <h3>Отаров Ислам Романович</h3>
+                        <p class="minister-position">Министр обороны</p>
+                        <p>Профессиональный военный с богатым опытом службы и стратегического планирования. Ислам Романович является сторонником модернизации вооруженных сил и внедрения передовых технологий в сферу обороны.</p>
+                        <p>Он выступает за создание эффективной системы национальной безопасности, основанной на принципах разумной достаточности и технологического превосходства.</p>
+                    </div>
+                </div>
+                <div class="minister-card">
+                    <div class="minister-image">
+                        <img src="https://postimg.cc/hz041Lfc" alt="Пахомов Кирилл Сергеевич">
+                    </div>
+                    <div class="minister-info">
+                        <h3>Пахомов Кирилл Сергеевич</h3>
+                        <p class="minister-position">Министр финансов</p>
+                        <p>Талантливый экономист и финансовый аналитик, разработавший проект "Коммунальный Анализатор". Кирилл Сергеевич является сторонником прозрачной и эффективной финансовой системы.</p>
+                        <p>Его цель — создание экономической модели, которая будет способствовать устойчивому развитию и справедливому распределению ресурсов, обеспечивая достойный уровень жизни для всех граждан.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <h2>Наши ценности</h2>
+            <div class="values-grid animate-on-scroll">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Справедливость</h3>
+                    <p>Мы стремимся к созданию общества, где каждый имеет равные возможности и доступ к ресурсам, независимо от социального статуса и происхождения.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Инновации</h3>
+                    <p>Мы поддерживаем научные исследования и технологические разработки, которые способствуют решению социальных и экологических проблем.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Устойчивое развитие</h3>
+                    <p>Мы выступаем за экономическое развитие, которое не наносит ущерба окружающей среде и учитывает интересы будущих поколений.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Сотрудничество</h3>
+                    <p>Мы верим в силу коллективного разума и стремимся к сотрудничеству со всеми заинтересованными сторонами.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новости -->
+    <section id="news" class="page-banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1600&auto=format');">
+        <div class="container">
+            <h1>Новости и события</h1>
+            <p>Будьте в курсе последних событий и инициатив партии</p>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="container">
+            <div class="news-filters">
+                <div class="search-box">
+                    <input type="text" placeholder="Поиск новостей...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="events">События</button>
+                    <button class="filter-btn" data-filter="announcements">Анонсы</button>
+                    <button class="filter-btn" data-filter="press">Пресс-релизы</button>
+                </div>
+            </div>
+
+            <div class="featured-news" id="event1">
+                <div class="featured-news-image">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800" alt="Представление партии в 3-м лицее">
+                </div>
+                <div class="featured-news-content">
+                    <span class="news-tag">Предстоящее событие</span>
+                    <h2>Представление партии в 3-м лицее</h2>
+                    <p class="news-date"><i class="far fa-calendar-alt"></i> 15 марта 2025, 14:00</p>
+                    <p class="news-location"><i class="fas fa-map-marker-alt"></i> 3-й лицей, ул. Школьная, 15</p>
+                    <div class="news-description">
+                        <p>Приглашаем всех учащихся, преподавателей и родителей на презентацию политической партии "Голос Будущего", которая состоится в четверг, 15 марта, в актовом зале 3-го лицея.</p>
+                        <p>В рамках мероприятия лидер партии Константин Константинович Рыжов и министры представят программу партии, расскажут о ключевых проектах и ответят на вопросы аудитории. Особое внимание будет уделено инициативам в сфере образования и молодежной политики.</p>
+                        <p>Это уникальная возможность для молодежи познакомиться с политическими процессами и принять участие в обсуждении будущего нашей страны.</p>
+                    </div>
+                    <div class="event-registration">
+                        <h3>Регистрация на мероприятие</h3>
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Имя</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Вопросы или комментарии</label>
+                                <textarea id="message" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Зарегистрироваться</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Другие новости и события</h2>
+            <div class="news-grid">
+                <div class="news-card" data-category="press">
+                    <div class="news-card-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Запуск проекта Коммунальный Анализатор">
+                    </div>
+                    <div class="news-card-content">
+                        <span class="news-tag">Пресс-релиз</span>
+                        <h3>Запуск проекта "Коммунальный Анализатор"</h3>
+                        <p class="news-date"><i class="far fa-calendar-alt"></i> 10 июня 2023</p>
+                        <p>Министр финансов Пахомов Кирилл Сергеевич представил инновационный проект для контроля и оптимизации коммунальных расходов.</p>
+                        <a href="#projects" class="btn-secondary">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="press">
+                    <div class="news-card-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Фильтр Микропластика">
+                    </div>
+                    <div class="news-card-content">
+                        <span class="news-tag">Пресс-релиз</span>
+                        <h3>Инновационный фильтр микропластика</h3>
+                        <p class="news-date"><i class="far fa-calendar-alt"></i> 5 июня 2023</p>
+                        <p>Министр здравоохранения Салимов Муслим Алиевич разработал уникальный фильтр микропластика на основе бактерий.</p>
+                        <a href="#projects" class="btn-secondary">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="events">
+                    <div class="news-card-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Встреча с избирателями">
+                    </div>
+                    <div class="news-card-content">
+                        <span class="news-tag">Прошедшее событие</span>
+                        <h3>Встреча с избирателями в Центральном районе</h3>
+                        <p class="news-date"><i class="far fa-calendar-alt"></i> 1 июня 2023</p>
+                        <p>Лидер партии Константин Константинович Рыжов провел встречу с жителями Центрального района, где обсудил актуальные проблемы и представил программу партии.</p>
+                        <a href="#" class="btn-secondary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-calendar">
+                <h3>Календарь событий</h3>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <h4>Март 2025</h4>
+                        <button class="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-names">
+                            <div>Пн</div>
+                            <div>Вт</div>
+                            <div>Ср</div>
+                            <div>Чт</div>
+                            <div>Пт</div>
+                            <div>Сб</div>
+                            <div>Вс</div>
+                        </div>
+                        <div class="calendar-days">
+                            <div class="prev-month-day">29</div>
+                            <div class="prev-month-day">30</div>
+                            <div class="prev-month-day">31</div>
+                            <div>1</div>
+                            <div>2</div>
+                            <div>3</div>
+                            <div>4</div>
+                            <div>5</div>
+                            <div>6</div>
+                            <div>7</div>
+                            <div>8</div>
+                            <div>9</div>
+                            <div>10</div>
+                            <div>11</div>
+                            <div>12</div>
+                            <div>13</div>
+                            <div>14</div>
+                            <div class="has-event current-day">15</div>
+                            <div>16</div>
+                            <div>17</div>
+                            <div>18</div>
+                            <div>19</div>
+                            <div class="has-event">20</div>
+                            <div>21</div>
+                            <div>22</div>
+                            <div>23</div>
+                            <div>24</div>
+                            <div class="has-event">25</div>
+                            <div>26</div>
+                            <div>27</div>
+                            <div>28</div>
+                            <div>29</div>
+                            <div>30</div>
+                            <div class="next-month-day">1</div>
+                  s          <div class="next-month-day">2</div>
+                        </div>
+                    </div>
+                    <div class="upcoming-events">
+                        <h4>Ближайшие события</h4>
+                        <div class="event-list">
+                            <div class="event-item">
+                                <div class="event-date">12 марта</div>
+                                <div class="event-title">Первое собрание партии</div>
+                                <a href="#event1">Подробнее</a>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">15 марта</div>
+                                <div class="event-title">Представление партии в 3-м лицее</div>
+                                <a href="#">Подробнее</a>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">20 марта</div>
+                                <div class="event-title">Круглый стол по экологическим проблемам</div>
+                                <a href="#">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проекты -->
+    <section id="projects" class="page-banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1600&auto=format');">
+        <div class="container">
+            <h1>Наши проекты</h1>
+            <p>Инновационные решения для лучшего будущего</p>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <div class="container">
+            <div class="projects-grid">
+                <div class="project-card" id="analyzer">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="Коммунальный Анализатор">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-minister">
+                            <div class="minister-avatar">
+                                <img src="https://postimg.cc/hz041Lfc" alt="Пахомов Кирилл">
+                            </div>
+                            <div>
+                                <div class="minister-name">Пахомов Кирилл</div>
+                                <div class="minister-title">Министр финансов</div>
+                            </div>
+                        </div>
+                        <h3>Коммунальный Анализатор</h3>
+                        <p>Инновационный проект для контроля и оптимизации коммунальных расходов. Система поможет гражданам эффективно управлять расходами на коммунальные услуги.</p>
+                        <div class="project-details">
+                            <h4>Ключевые особенности проекта:</h4>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-chart-line"></i></div>
+                                <div>Мониторинг потребления ресурсов в режиме реального времени</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-lightbulb"></i></div>
+                                <div>Рекомендации по оптимизации расходов</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" id="filter">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1527689638836-411945a2b57c?w=800" alt="Фильтр Микропластика">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-minister">
+                            <div class="minister-avatar">
+                                <img src="https://via.placeholder.com/100x100" alt="Салимов Муслим">
+                            </div>
+                            <div>
+                                <div class="minister-name">Салимов Муслим</div>
+                                <div class="minister-title">Министр здравоохранения</div>
+                            </div>
+                        </div>
+                        <h3>Инновационный фильтр микропластика</h3>
+                        <p>Революционный проект в области экологии и здравоохранения. Разработанная технология позволяет эффективно очищать воду от микропластика с использованием инновационных методов фильтрации.</p>
+                        <div class="project-details">
+                            <h4>Ключевые особенности проекта:</h4>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-tint"></i></div>
+                                <div>Высокоэффективная система очистки воды</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-leaf"></i></div>
+                                <div>Экологически безопасная технология</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="page-banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&auto=format');">
+        <div class="container">
+            <h1>Контакты</h1>
+            <p>Свяжитесь с нами, чтобы узнать больше о нашей партии и проектах</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Наши контакты</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Адрес</h4>
+                            <p>г. Прохладный, ул. Головко, д. 229</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Телефон</h4>
+                            <p>+7 (928) 079-23-31</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>info@golos-budushego.ru</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Часы работы</h4>
+                            <p>Понедельник - Пятница: 9:00 - 18:00</p>
+                            <p>Суббота - Воскресенье: Выходной</p>
+                        </div>
+                    </div>
+                    <div class="contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.6746367320747!2d44.02824731573567!3d43.61037397912271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2z0JzQvtGB0LrQvtCy0YHQutC40Lkg0JrRgNC10LzQu9GM!5e0!3m2!1sru!2sru!4v1623159856123!5m2!1sru!2sru" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Свяжитесь с нами</h3>
+                    <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время.</p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Тема</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://i.postimg.cc/47xMyvvM/logo.png" alt="Логотип Голос Будущего">
+                    <p>© 2025 Политическая партия "Голос Будущего". Все права защищены.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#news">Новости</a></li>
+                        <li><a href="#projects">Проекты</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-envelope"></i> info@golos-budushego.ru</p>
+                    <p><i class="fas fa-phone"></i> +7 (928) 079-23-31</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Плавная прокрутка к якорям
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Закрываем мобильное меню при клике на ссылку
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                        }
+                        
+                        // Обновляем активную ссылку
+                        document.querySelectorAll('.main-nav a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Анимация при прокрутке
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.animate-on-scroll');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight * 0.8) {
+                        element.classList.add('animated');
+                    }
+                });
+            };
+            
+            // Добавляем класс для анимации к нужным элементам
+            document.querySelectorAll('.welcome-content, .news-item, .cta, .minister-card, .value-card, .project-card').forEach(element => {
+                element.classList.add('animate-on-scroll');
+            });
+            
+            // Запускаем анимацию при загрузке и прокрутке
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Обработка формы контактов
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Активная ссылка при прокрутке
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                
+                document.querySelectorAll('section[id]').forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        document.querySelectorAll('.main-nav a').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + sectionId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
